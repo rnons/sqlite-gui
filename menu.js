@@ -1,5 +1,8 @@
 'use strict';
 
+const dialog = require('dialog');
+const emitter = require('./emitter');
+
 const template = [
   {
     label: 'Database',
@@ -7,6 +10,15 @@ const template = [
       {
         label: 'Connect Database',
         accelerator: 'CmdOrCtrl+O',
+        click: function() {
+          const files = dialog.showOpenDialog({
+            properties: ['openFile'],
+            filters: [
+              { name: 'SQLite Database File', extensions: ['sqlite'] }
+            ]
+          });
+          emitter.emit('database-connected', files[0]);
+        }
       }
     ]
   },

@@ -6,6 +6,7 @@ const Menu = require('menu');
 require('crash-reporter').start();
 
 const menu_template = require('./menu');
+const emitter = require('./emitter');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -41,5 +42,9 @@ app.on('ready', function() {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null;
+  });
+
+  emitter.on('database-connected', (file) => {
+    console.log(file);
   });
 });
