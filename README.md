@@ -3,7 +3,7 @@
 Install dependencies
 
 ```
-npm install -g electron-prebuilt
+npm install -g electron-prebuilt watchify
 npm install
 ```
 
