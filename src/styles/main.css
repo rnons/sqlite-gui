@@ -1,0 +1,5 @@
+@import 'components/variables';
+
+h1 {
+  color: var(--primary-color);
+}
