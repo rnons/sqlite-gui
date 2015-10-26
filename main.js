@@ -1,6 +1,7 @@
 const app = require('app');
 const BrowserWindow = require('browser-window');
 const Menu = require('menu');
+const ipc = require('ipc');
 
 // Report crashes to our server.
 require('crash-reporter').start();
@@ -48,8 +49,19 @@ app.on('ready', function() {
 
   emitter.on('database-connected', (file) => {
     database.connect(file);
+    getTablesHandler();
+  });
+
+  ipc.on('get-tables', () => {
+    getTablesHandler();
+  });
+
+  function getTablesHandler() {
     database.getTables().then((tables) => {
       webContents.send('tables', tables);
+    }).catch((err) => {
+      if (err) console.log('hi', err)
     });
-  });
+  }
 });
+

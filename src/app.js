@@ -19,6 +19,7 @@ const ipc = window.require('ipc');
 class AppComponent{
   constructor(zone) {
     this.tables = [];
+    ipc.send('get-tables');
     ipc.on('tables', (tables) => {
       zone.run(() => {
         this.tables = tables;
