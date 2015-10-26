@@ -10,17 +10,25 @@ import {RouteParams} from 'angular2/router';
   directives: [CORE_DIRECTIVES]
 })
 export class TableCom {
-  constructor(params, zone) {
+  constructor(params, _zone) {
+    this._zone = _zone;
     this.name = params.get('name');
     this.rows = [];
     this.keys = [];
+    this.onTable = this.onTable.bind(this);
     ipc.send('get-table', this.name);
-    ipc.on('table', (data) => {
-      zone.run(() => {
-        this.rows = data;
-        this.keys = Object.keys(this.rows[0]);
-      });
-    })
+    ipc.on('table', this.onTable);
+  }
+
+  onTable(data) {
+    this._zone.run(() => {
+      this.rows = data;
+      this.keys = Object.keys(this.rows[0]);
+    });
+  }
+
+  onDestroy() {
+    ipc.removeListener('table', this.onTable);
   }
 }
 
