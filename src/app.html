@@ -1,13 +1,12 @@
 <main class="Main">
   <aside class="Main-aside">
-    <div *ng-for="#table of tables">
-      <li>
+    <div>
+      <li *ng-for="#table of tables">
         <a [router-link]="['/Table', {name: table.name}]">{{table.name}}</a>
       </li>
     </div>
   </aside>
   <div class="Main-content">
-    content
     <router-outlet></router-outlet>
   </div>
 </main>
