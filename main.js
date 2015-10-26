@@ -8,7 +8,7 @@ require('crash-reporter').start();
 
 const database = require('./database');
 const emitter = require('./emitter');
-const menu_template = require('./menu');
+const menuTemplate = require('./menu_template');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -30,7 +30,7 @@ app.on('ready', function() {
   mainWindow = new BrowserWindow({width: 800, height: 600});
   const webContents = mainWindow.webContents;
 
-  const menu = Menu.buildFromTemplate(menu_template);
+  const menu = Menu.buildFromTemplate(menuTemplate);
   Menu.setApplicationMenu(menu);
 
   // and load the index.html of the app.
@@ -47,7 +47,7 @@ app.on('ready', function() {
     mainWindow = null;
   });
 
-  emitter.on('database-connected', (file) => {
+  emitter.on('connect-database', (file) => {
     database.connect(file);
     getTablesHandler();
   });

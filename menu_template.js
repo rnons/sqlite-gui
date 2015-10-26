@@ -17,7 +17,7 @@ const template = [
               { name: 'SQLite Database File', extensions: ['sqlite'] }
             ]
           });
-          emitter.emit('database-connected', files[0]);
+          emitter.emit('connect-database', files[0]);
         }
       }
     ]
