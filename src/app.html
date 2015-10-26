@@ -1,6 +1,8 @@
 <main class="Main">
   <aside class="Main-aside">
-    aside
+    <div *ng-for="#table of tables">
+      <li>{{table.name}}</li>
+    </div>
   </aside>
   <div class="Main-content">
     content
