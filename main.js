@@ -5,8 +5,9 @@ const Menu = require('menu');
 // Report crashes to our server.
 require('crash-reporter').start();
 
-const menu_template = require('./menu');
+const database = require('./database');
 const emitter = require('./emitter');
+const menu_template = require('./menu');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -26,6 +27,7 @@ app.on('window-all-closed', function() {
 app.on('ready', function() {
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600});
+  const webContents = mainWindow.webContents;
 
   const menu = Menu.buildFromTemplate(menu_template);
   Menu.setApplicationMenu(menu);
@@ -45,6 +47,9 @@ app.on('ready', function() {
   });
 
   emitter.on('database-connected', (file) => {
-    console.log(file);
+    database.connect(file);
+    database.getTables().then((tables) => {
+      webContents.send('tables', tables);
+    });
   });
 });
