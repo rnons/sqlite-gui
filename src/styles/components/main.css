@@ -1,0 +1,9 @@
+.Main {
+  display: flex;
+  height: calc(100vh - 1em);
+}
+
+.Main-aside {
+  background-color: gray;
+  width: 12em;
+}

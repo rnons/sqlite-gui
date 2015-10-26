@@ -1,4 +1,7 @@
-@import 'components/variables';
+@import 'base/elements';
+@import 'base/variables';
+
+@import 'components/main';
 
 h1 {
   color: var(--primary-color);
