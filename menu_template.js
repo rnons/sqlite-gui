@@ -1,7 +1,7 @@
 'use strict';
 
 const dialog = require('dialog');
-const emitter = require('./emitter');
+const ipc = require('ipc');
 
 const template = [
   {
@@ -17,7 +17,7 @@ const template = [
               { name: 'SQLite Database File', extensions: ['sqlite'] }
             ]
           });
-          emitter.emit('connect-database', files[0]);
+          ipc.emit('connect-database', files[0]);
         }
       }
     ]

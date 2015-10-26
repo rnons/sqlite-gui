@@ -7,7 +7,6 @@ const ipc = require('ipc');
 require('crash-reporter').start();
 
 const database = require('./database');
-const emitter = require('./emitter');
 const menuTemplate = require('./menu_template');
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -47,7 +46,7 @@ app.on('ready', function() {
     mainWindow = null;
   });
 
-  emitter.on('connect-database', (file) => {
+  ipc.on('connect-database', (file) => {
     database.connect(file);
     getTablesHandler();
   });
