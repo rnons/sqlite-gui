@@ -56,11 +56,19 @@ app.on('ready', function() {
     getTablesHandler();
   });
 
+  ipc.on('get-table', (event, name) => {
+    database.getTable(name).then((table) => {
+      event.sender.send('table', table);
+    }).catch((err) => {
+      if (err) console.log(err)
+    });
+  });
+
   function getTablesHandler() {
     database.getTables().then((tables) => {
       webContents.send('tables', tables);
     }).catch((err) => {
-      if (err) console.log('hi', err)
+      if (err) console.log(err)
     });
   }
 });

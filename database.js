@@ -16,5 +16,14 @@ module.exports = {
         resolve(res);
       })
     });
+  },
+
+  getTable: (name) => {
+    return new Promise((resolve, reject) => {
+      if (!db) reject();
+      db.all(`SELECT * FROM ${name}`, (err, res) => {
+        resolve(res);
+      })
+    });
   }
 }
