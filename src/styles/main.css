@@ -3,6 +3,8 @@
 
 @import 'components/main';
 
+@import 'fontello';
+
 h1 {
   color: var(--primary-color);
 }
