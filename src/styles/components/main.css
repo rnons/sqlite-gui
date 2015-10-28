@@ -4,6 +4,10 @@
 }
 
 .Main-aside {
-  background-color: gray;
-  width: 12em;
+  border-right: 1px solid gray;
+  width: 10em;
+}
+
+.Main-content {
+  flex: 1 0;
 }

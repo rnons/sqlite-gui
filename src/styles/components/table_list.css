@@ -1,0 +1,17 @@
+.TableList-header {
+  padding: 1rem 1rem 0;
+}
+
+.TableList-link {
+  display: block;
+  line-height: 1;
+  padding: 0.1em 1em;
+}
+
+.TableList-link.router-link-active {
+  background-color: #2b7dfc;
+  color: white;
+}
+.TableList-link i {
+  vertical-align: text-bottom;
+}

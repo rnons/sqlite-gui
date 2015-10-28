@@ -1,9 +1,15 @@
 <main class="Main">
   <aside class="Main-aside">
     <div>
-      <li *ng-for="#table of tables">
-        <a [router-link]="['/Table', {name: table.name}]">{{table.name}}</a>
-      </li>
+      <h3 class="TableList-header">Tables</h3>
+      <ul>
+        <li *ng-for="#table of tables">
+          <a class="TableList-link"
+             [router-link]="['/Table', {name: table.name}]">
+            <i class="icon-table"></i>{{table.name}}
+          </a>
+        </li>
+      </ul>
     </div>
   </aside>
   <div class="Main-content">
