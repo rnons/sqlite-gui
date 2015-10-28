@@ -35,6 +35,8 @@ import {TableCom} from './components/table/table';
 ])
 class AppComponent{
   constructor(zone) {
+    this.asideSize = 160;
+    this.isResizing = false;
     this.tables = [];
     ipc.send('get-tables');
     ipc.on('tables', (tables) => {
@@ -42,6 +44,26 @@ class AppComponent{
         this.tables = tables;
       });
     });
+  }
+
+  beginResize(event) {
+    event.preventDefault();
+    this.isResizing = true;
+    this.x0 = event.pageX;
+    document.body.style.cursor = 'col-resize';
+  }
+
+  resizing(event) {
+    if (this.isResizing) {
+      const xt = event.pageX;
+      this.asideSize += xt - this.x0;
+      this.x0 = xt;
+    }
+  }
+
+  finishResize(event) {
+    this.isResizing = false;
+    document.body.style.cursor = 'initial';
   }
 }
 

@@ -1,5 +1,8 @@
-<main class="Main">
-  <aside class="Main-aside">
+<main class="Main"
+      (mousemove)="resizing($event)"
+      (mouseup)="finishResize($event)">
+  <aside class="Main-aside"
+         [style.width.px]="asideSize">
     <div>
       <h4 class="TableList-header">Tables</h4>
       <ul>
@@ -12,6 +15,9 @@
       </ul>
     </div>
   </aside>
+  <div class="Main-slider"
+       (mousedown)="beginResize($event)">
+  </div>
   <div class="Main-content">
     <router-outlet></router-outlet>
   </div>

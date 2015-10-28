@@ -3,9 +3,13 @@
   height: calc(100vh - 1em);
 }
 
-.Main-aside {
-  border-right: 1px solid gray;
-  width: 10em;
+.Main-slider {
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  background-color: #b8b8b8;
+  background-clip: content-box;
+  cursor: col-resize;
+  width: 1px;
 }
 
 .Main-content {
