@@ -7,6 +7,9 @@
   display: block;
   line-height: 1;
   padding: 0.2em 1em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .TableList-link.router-link-active {
