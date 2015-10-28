@@ -5,7 +5,7 @@
 .TableList-link {
   display: block;
   line-height: 1;
-  padding: 0.1em 1em;
+  padding: 0.2em 1em;
 }
 
 .TableList-link.router-link-active {
