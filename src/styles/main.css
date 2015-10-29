@@ -1,9 +1,11 @@
 @import 'base/elements';
 @import 'base/variables';
 
+@import 'components/button';
 @import 'components/main';
 @import 'components/table';
 @import 'components/table_list';
+@import 'components/toolbar';
 
 @import 'fontello';
 

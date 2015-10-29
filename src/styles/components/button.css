@@ -1,0 +1,29 @@
+.Button {
+  border: 1px solid #b8b8b8;
+  border-radius: 0.3em;
+  padding: 0.3em 0.5em;
+}
+
+.ButtonGroup {
+  display: flex;
+}
+
+.ButtonGroup-item:first-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.ButtonGroup-item:last-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.ButtonGroup-item:not(:last-child) {
+  border-right: none;
+}
+
+.ButtonGroup-item.is-active {
+  background-color: #5d5d5d;
+  border-color: #5d5d5d;
+  color: white;
+}

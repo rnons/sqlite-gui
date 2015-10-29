@@ -1,3 +1,15 @@
+<div class="Toolbar">
+  <span class="Toolbar-aside"
+        [style.width.px]="asideSize">
+    <a class="Button" href="">
+      <i class="icon-arrows-cw"></i>Refresh
+    </a>
+  </span>
+  <span class="ButtonGroup">
+    <a class="Button ButtonGroup-item" href="">Structure</a>
+    <a class="Button ButtonGroup-item is-active" href="">Content</a>
+  </span>
+</div>
 <main class="Main"
       (mousemove)="resizing($event)"
       (mouseup)="finishResize($event)">
@@ -22,6 +34,3 @@
     <router-outlet></router-outlet>
   </div>
 </main>
-<div>
-  <a href="">Reload</a>
-</div>

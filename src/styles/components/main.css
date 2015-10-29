@@ -1,6 +1,6 @@
 .Main {
   display: flex;
-  height: calc(100vh - 1em);
+  height: calc(100vh - 2.6em - 3px);
 }
 
 .Main-aside {
@@ -19,6 +19,6 @@
 }
 
 .Main-content {
-  flex: 1 0;
+  flex: 1;
   overflow-y: scroll;
 }

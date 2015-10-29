@@ -1,0 +1,10 @@
+.Toolbar {
+  background-color: #f4f4f4;
+  border-bottom: 1px solid #b8b8b8;
+  display: flex;
+  padding: 0.5em;
+}
+
+.Toolbar-aside {
+  display: flex;
+}
