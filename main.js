@@ -55,9 +55,9 @@ app.on('ready', function() {
     getTablesHandler();
   });
 
-  ipc.on('get-table', (event, name) => {
+  ipc.on('get-table-content', (event, name) => {
     database.getTable(name).then((table) => {
-      event.sender.send('table', table);
+      event.sender.send('table-content', table);
     }).catch((err) => {
       if (err) console.log(err)
     });

@@ -6,8 +6,10 @@
     </a>
   </span>
   <span class="ButtonGroup">
-    <a class="Button ButtonGroup-item" href="">Structure</a>
-    <a class="Button ButtonGroup-item is-active" href="">Content</a>
+    <a class="Button ButtonGroup-item"
+       [router-link]="['/Table', {name: currentTable}, 'Structure']">Structure</a>
+    <a class="Button ButtonGroup-item is-active"
+       [router-link]="['/Table', {name: currentTable}, 'Content']">Content</a>
   </span>
 </div>
 <main class="Main"
@@ -20,7 +22,7 @@
       <ul>
         <li *ng-for="#table of tables">
           <a class="TableList-link"
-             [router-link]="['/Table', {name: table.name}]">
+             [router-link]="['/Table', {name: table.name}, 'Content']">
             <i class="icon-table"></i>{{table.name}}
           </a>
         </li>

@@ -8,7 +8,7 @@ export class Table {
   constructor(_zone) {
     this._zone = _zone;
     this.name = null;
-    this.content = null;
+    this.rows = null;
     this.keys = null;
     this.onContent = this.onContent.bind(this);
     ipc.on('table-content', this.onContent);
@@ -24,8 +24,8 @@ export class Table {
 
   onContent(data) {
     this._zone.run(_ => {
-      this.content = data;
-      this.keys = Object.keys(this.content[0]);
+      this.rows = data;
+      this.keys = Object.keys(this.rows[0]);
     })
   }
 };
