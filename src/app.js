@@ -16,28 +16,38 @@ import {
   HashLocationStrategy,
   LocationStrategy,
   Route,
+  Router,
   RouteConfig,
   RouterLink,
   RouterOutlet,
   ROUTER_PROVIDERS
 } from 'angular2/router';
 
+import {Table} from './services/table';
 import {TableCom} from './components/table/table';
 
 
 @Component({
   selector: 'sqlite-gui-app',
   templateUrl: 'src/app.html',
+  viewProviders: [Table],
   directives: [CORE_DIRECTIVES, RouterLink, RouterOutlet]
 })
 @RouteConfig([
-  new Route({ path: '/table/:name', component: TableCom, as: 'Table' })
+  new Route({ path: '/table/:name/...', component: TableCom, as: 'Table' })
 ])
 class AppComponent{
-  constructor(zone) {
+  constructor(zone, router) {
+    this.router = router;
     this.asideSize = 160;
     this.isResizing = false;
     this.tables = [];
+    router.subscribe(val => {
+      router.recognize(val).then(ins => {
+        this.currentTable = ins.component.params.name;
+      });
+    });
+
     ipc.send('get-tables');
     ipc.on('tables', (tables) => {
       zone.run(() => {
@@ -67,7 +77,7 @@ class AppComponent{
   }
 }
 
-AppComponent.parameters = [[NgZone]];
+AppComponent.parameters = [[NgZone], [Router]];
 
 bootstrap(AppComponent, [
   ROUTER_PROVIDERS,
