@@ -23,10 +23,10 @@ export class Table {
   }
 
   onContent(data) {
-    this._zone.run(_ => {
+    this._zone.run(() => {
       this.rows = data;
       this.keys = Object.keys(this.rows[0]);
-    })
+    });
   }
 };
 

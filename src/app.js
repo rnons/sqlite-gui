@@ -71,7 +71,7 @@ class AppComponent{
     }
   }
 
-  finishResize(event) {
+  finishResize() {
     this.isResizing = false;
     document.body.style.cursor = 'initial';
   }
