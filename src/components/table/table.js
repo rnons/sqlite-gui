@@ -2,39 +2,11 @@ const ipc = window.require('ipc');
 
 import {CORE_DIRECTIVES, Component, NgZone} from 'angular2/angular2';
 import {Route, RouteParams, RouteConfig, RouterOutlet} from 'angular2/router';
+
 import {Table} from '../../services/table';
+import {TableContentCmp} from '../table_content/table_content';
+import {TableStructureCmp} from '../table_structure/table_structure';
 
-
-@Component({
-  selector: 'table-content-component',
-  templateUrl: 'src/components/table/content.html',
-  directives: [CORE_DIRECTIVES]
-})
-class TableContentCmp {
-  constructor(params, _zone, table) {
-    this.table = table;
-    this.table.getContent();
-  }
-
-  getContent() {
-    this.rows = this.table.content;
-    if (this.rows.length) {
-      this.keys = Object.keys(this.rows[0]);
-    }
-  }
-}
-
-TableContentCmp.parameters = [[RouteParams], [NgZone], [Table]];
-
-@Component({
-  selector: 'table-structure-component',
-  templateUrl: 'src/components/table/structure.html',
-  directives: [CORE_DIRECTIVES]
-})
-class TableStructureCmp {
-  constructor() {
-  }
-}
 
 @Component({
   selector: 'table-component',
