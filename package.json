@@ -23,13 +23,15 @@
     "url": "https://github.com/rnons/sqlite-gui/issues"
   },
   "homepage": "https://github.com/rnons/sqlite-gui#readme",
+  "dependencies": {
+    "angular2": "^2.0.0-alpha.45",
+    "reflect-metadata": "^0.1.2",
+    "sqlite3": "^3.1.1",
+    "zone.js": "^0.5.8"
+  },
   "devDependencies": {
-    "angular2": "^2.0.0-alpha.44",
     "babelify": "^6.4.0",
     "postcss-cssnext": "^2.2.0",
-    "postcss-import": "^7.1.0",
-    "reflect-metadata": "^0.1.2",
-    "sqlite3": "^3.1.0",
-    "zone.js": "^0.5.8"
+    "postcss-import": "^7.1.0"
   }
 }
