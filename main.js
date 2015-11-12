@@ -17,7 +17,7 @@ var mainWindow = null;
 app.on('window-all-closed', function() {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform != 'darwin') {
+  if (process.platform !== 'darwin') {
     app.quit();
   }
 });
@@ -46,6 +46,14 @@ app.on('ready', function() {
     mainWindow = null;
   });
 
+  function getTablesHandler() {
+    database.getTables().then((tables) => {
+      webContents.send('tables', tables);
+    }).catch((err) => {
+      if (err) console.log(err);
+    });
+  }
+
   ipc.on('connect-database', (file) => {
     database.connect(file);
     getTablesHandler();
@@ -55,6 +63,14 @@ app.on('ready', function() {
     getTablesHandler();
   });
 
+  ipc.on('get-table-structure', (event, name) => {
+    database.getTableStructure(name).then((table) => {
+      event.sender.send('table-structure', table);
+    }).catch((err) => {
+      if (err) console.log(err);
+    });
+  });
+
   ipc.on('get-table-content', (event, name) => {
     database.getTableContent(name).then((table) => {
       event.sender.send('table-content', table);
@@ -62,13 +78,5 @@ app.on('ready', function() {
       if (err) console.log(err);
     });
   });
-
-  function getTablesHandler() {
-    database.getTables().then((tables) => {
-      webContents.send('tables', tables);
-    }).catch((err) => {
-      if (err) console.log(err);
-    });
-  }
 });
 

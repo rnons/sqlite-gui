@@ -10,22 +10,35 @@ export class Table {
     this.name = null;
     this.rows = null;
     this.keys = null;
+    this.onStructure = this.onStructure.bind(this);
     this.onContent = this.onContent.bind(this);
+    ipc.on('table-structure', this.onStructure);
     ipc.on('table-content', this.onContent);
   }
 
   use(name) {
     this.name = name;
+    this.getStructure();
+  }
+
+  getStructure() {
+    ipc.send('get-table-structure', this.name);
   }
 
   getContent() {
     ipc.send('get-table-content', this.name);
   }
 
+  onStructure(data) {
+    this.structure = data;
+    this.keys = data.map((field) => {
+      return field.name;
+    });
+  }
+
   onContent(data) {
     this._zone.run(() => {
       this.rows = data;
-      this.keys = Object.keys(this.rows[0]);
     });
   }
 };
