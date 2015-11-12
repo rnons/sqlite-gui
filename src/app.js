@@ -42,6 +42,7 @@ class AppComponent{
     this.asideSize = 160;
     this.isResizing = false;
     this.tables = [];
+    this.subRoute = 'Content';
     router.subscribe(val => {
       router.recognize(val).then(ins => {
         this.currentTable = ins.component.params.name;
@@ -54,6 +55,11 @@ class AppComponent{
         this.tables = tables;
       });
     });
+  }
+
+  navigateTo(routeName) {
+    this.subRoute = routeName;
+    this.router.navigate(['/Table', {name: this.currentTable}, routeName]);
   }
 
   beginResize(event) {

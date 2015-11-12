@@ -7,9 +7,11 @@
   </span>
   <span class="ButtonGroup">
     <a class="Button ButtonGroup-item"
-       [router-link]="['/Table', {name: currentTable}, 'Structure']">Structure</a>
-    <a class="Button ButtonGroup-item is-active"
-       [router-link]="['/Table', {name: currentTable}, 'Content']">Content</a>
+       [class.is-active]="subRoute === 'Structure'"
+       (click)="navigateTo('Structure')">Structure</a>
+    <a class="Button ButtonGroup-item"
+       [class.is-active]="subRoute === 'Content'"
+       (click)="navigateTo('Content')">Content</a>
   </span>
 </div>
 <main class="Main"
@@ -22,7 +24,7 @@
       <ul>
         <li *ng-for="#table of tables">
           <a class="TableList-link"
-             [router-link]="['/Table', {name: table.name}, 'Content']">
+             [router-link]="['/Table', {name: table.name}, subRoute]">
             <i class="icon-table"></i>{{table.name}}
           </a>
         </li>
