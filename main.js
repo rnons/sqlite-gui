@@ -56,10 +56,10 @@ app.on('ready', function() {
   });
 
   ipc.on('get-table-content', (event, name) => {
-    database.getTable(name).then((table) => {
+    database.getTableContent(name).then((table) => {
       event.sender.send('table-content', table);
     }).catch((err) => {
-      if (err) console.log(err)
+      if (err) console.log(err);
     });
   });
 
@@ -67,7 +67,7 @@ app.on('ready', function() {
     database.getTables().then((tables) => {
       webContents.send('tables', tables);
     }).catch((err) => {
-      if (err) console.log(err)
+      if (err) console.log(err);
     });
   }
 });

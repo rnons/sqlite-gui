@@ -14,7 +14,7 @@ module.exports = {
       if (!db) reject();
       db.all(sql, (err, res) => {
         resolve(res);
-      })
+      });
     });
   },
 
@@ -22,7 +22,11 @@ module.exports = {
     return this.execute('SELECT * FROM sqlite_master where type="table"');
   },
 
-  getTable: function(name) {
+  getTableStructure: function(name) {
+    return this.execute(`PRAGMA table_info(${name})`);
+  },
+
+  getTableContent: function(name) {
     return this.execute(`SELECT * FROM ${name}`);
   }
-}
+};
