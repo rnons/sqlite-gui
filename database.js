@@ -9,21 +9,20 @@ module.exports = {
     db = new sqlite3.Database(file);
   },
 
-  getTables: () => {
+  execute: (sql) => {
     return new Promise((resolve, reject) => {
       if (!db) reject();
-      db.all('SELECT * FROM sqlite_master where type="table"', (err, res) => {
+      db.all(sql, (err, res) => {
         resolve(res);
       })
     });
   },
 
-  getTable: (name) => {
-    return new Promise((resolve, reject) => {
-      if (!db) reject();
-      db.all(`SELECT * FROM ${name}`, (err, res) => {
-        resolve(res);
-      })
-    });
+  getTables: function() {
+    return this.execute('SELECT * FROM sqlite_master where type="table"');
+  },
+
+  getTable: function(name) {
+    return this.execute(`SELECT * FROM ${name}`);
   }
 }
