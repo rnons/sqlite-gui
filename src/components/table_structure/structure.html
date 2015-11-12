@@ -1,1 +1,13 @@
-structure.html
+<table class="Table">
+  <thead class="Table-header">
+    <tr>
+      <th *ng-for="#key of keys">{{keyNames[key]}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ng-for="#row of table.structure">
+      <td *ng-for="#key of keys">{{row[key]}}</td>
+    </tr>
+  </tbody>
+</table>
+
