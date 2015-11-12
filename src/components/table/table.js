@@ -1,7 +1,7 @@
 const ipc = window.require('ipc');
 
 import {CORE_DIRECTIVES, Component, NgZone} from 'angular2/angular2';
-import {Route, RouteParams, RouteConfig, RouterOutlet} from 'angular2/router';
+import {RouteParams, RouteConfig, RouterOutlet} from 'angular2/router';
 
 import {Table} from '../../services/table';
 import {TableContentCmp} from '../table_content/table_content';
@@ -14,8 +14,8 @@ import {TableStructureCmp} from '../table_structure/table_structure';
   directives: [CORE_DIRECTIVES, RouterOutlet]
 })
 @RouteConfig([
-  new Route({ path: '', component: TableContentCmp, as: 'Content' }),
-  new Route({ path: '/structure', component: TableStructureCmp, as: 'Structure' })
+  { path: '', component: TableContentCmp, as: 'Content', data: {name: 'Content'} },
+  { path: '/structure', component: TableStructureCmp, as: 'Structure', data: {name: 'Structure'} }
 ])
 export class TableCom {
   constructor(params, _zone, table) {

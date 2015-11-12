@@ -15,7 +15,6 @@ import {
   APP_BASE_HREF,
   HashLocationStrategy,
   LocationStrategy,
-  Route,
   Router,
   RouteConfig,
   RouterLink,
@@ -34,7 +33,7 @@ import {TableCom} from './components/table/table';
   directives: [CORE_DIRECTIVES, RouterLink, RouterOutlet]
 })
 @RouteConfig([
-  new Route({ path: '/table/:name/...', component: TableCom, as: 'Table' })
+  { path: '/table/:name/...', component: TableCom, as: 'Table' }
 ])
 class AppComponent{
   constructor(zone, router) {
@@ -46,6 +45,7 @@ class AppComponent{
     router.subscribe(val => {
       router.recognize(val).then(ins => {
         this.currentTable = ins.component.params.name;
+        this.subRoute = ins.child.component.routeData.data.name;
       });
     });
 
