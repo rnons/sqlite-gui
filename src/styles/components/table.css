@@ -1,26 +1,52 @@
+.FixedTable {
+  padding-top: 1.4em;
+  position: relative;
+}
+
+.FixedTable-header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  border-bottom: 1px solid #b8b8b8;
+  height: 1.4em;
+}
+
+.FixedTable-content {
+  overflow-y: auto;
+  height: var(--tbody-height);
+}
+
 .Table {
   border-spacing: 0;
   width: 100%;
+  table-layout: fixed;
 }
 
 .Table th {
-  border-right: 1px solid;
-  border-bottom: 1px solid;
-  border-color: #b8b8b8;
   font-weight: normal;
-  text-align: left;
+  padding: 0;
 }
 
-.Table th,
 .Table td {
   padding: 0.2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .Table tr:nth-child(odd) {
   background-color: #f2f2f2;
 }
 
-.Table-header {
-  background-color: #f4f4f4;
-  border-bottom: 1px solid #b8b8b8;
+.Table-field {
+  position: absolute;
+  top: 0;
+  border-left: 1px solid #b8b8b8;
+  padding-top: 0.1em;
+  padding-left: 0.1em;
+  height: 1.4em;
+}
+
+th[data-index='0'] .Table-field {
+  border-left: none;
 }

@@ -1,3 +1,5 @@
 :root {
   --primary-color: red;
+  --main-height: calc(100vh - 2.6em - 3px);
+  --tbody-height: calc(100vh - 2.6em - 3px - 1.4em);
 }
