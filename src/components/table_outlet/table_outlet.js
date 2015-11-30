@@ -8,18 +8,18 @@ import {TableStructureCmp} from '../table_structure/table_structure';
 
 @Component({
   selector: 'table-component',
-  templateUrl: 'src/components/table/table.html',
+  template: '<router-outlet></router-outlet>',
   directives: [CORE_DIRECTIVES, RouterOutlet]
 })
 @RouteConfig([
   { path: '', component: TableContentCmp, as: 'Content', data: {name: 'Content'} },
   { path: '/structure', component: TableStructureCmp, as: 'Structure', data: {name: 'Structure'} }
 ])
-export class TableCom {
+export class TableOutlet {
   constructor(params, table) {
     this.name = params.get('name');
     table.use(this.name);
   }
 };
 
-TableCom.parameters = [[RouteParams], [Table]];
+TableOutlet.parameters = [[RouteParams], [Table]];

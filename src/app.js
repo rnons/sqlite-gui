@@ -23,7 +23,7 @@ import {
 } from 'angular2/router';
 
 import {Table} from './services/table';
-import {TableCom} from './components/table/table';
+import {TableOutlet} from './components/table_outlet/table_outlet';
 
 
 @Component({
@@ -33,7 +33,7 @@ import {TableCom} from './components/table/table';
   directives: [CORE_DIRECTIVES, RouterLink, RouterOutlet]
 })
 @RouteConfig([
-  { path: '/table/:name/...', component: TableCom, as: 'Table' }
+  { path: '/table/:name/...', component: TableOutlet, as: 'Table' }
 ])
 class AppComponent{
   constructor(zone, router) {
