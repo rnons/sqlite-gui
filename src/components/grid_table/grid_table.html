@@ -1,0 +1,28 @@
+<div class="HiddenTable js-hidden-table">
+  <table>
+    <thead>
+      <tr>
+        <th *ng-for="#field of fields">{{field.title}}</th>
+      </tr>
+    </thead>
+  </table>
+</div>
+<div class="FixedTable" [style.width.px]="tableWidth">
+  <div class="FixedTable-header"></div>
+  <div class="FixedTable-content">
+    <table class="Table">
+      <thead class="Table-header">
+        <tr>
+          <th *ng-for="#field of fields; #i=index" [attr.data-index]="i">
+            <div class="Table-field">{{field.title}}</div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ng-for="#row of rows">
+          <td *ng-for="#field of fields">{{row[field.name]}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
