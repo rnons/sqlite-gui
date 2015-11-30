@@ -1,4 +1,6 @@
 const ipc = window.require('ipc');
+const remote = window.require("remote");
+const database = remote.require("./database");
 
 import {EventEmitter, NgZone} from 'angular2/angular2';
 import {Injectable} from 'angular2/angular2';
@@ -19,11 +21,15 @@ export class Table {
 
   use(name) {
     this.name = name;
-    this.getStructure();
   }
 
   getStructure() {
-    ipc.send('get-table-structure', this.name);
+    return database.getTableStructure(this.name).then((data) => {
+      this.structure = data;
+      this.keys = data.map((field) => {
+        return field.name;
+      });
+    });
   }
 
   getContent() {

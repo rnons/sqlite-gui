@@ -1,4 +1,4 @@
-import {CORE_DIRECTIVES, Component, NgZone} from 'angular2/angular2';
+import {CORE_DIRECTIVES, Component} from 'angular2/angular2';
 
 import {Table} from '../../services/table';
 import {GridTable} from '../grid_table/grid_table';
@@ -9,11 +9,15 @@ import {GridTable} from '../grid_table/grid_table';
   directives: [CORE_DIRECTIVES, GridTable]
 })
 export class TableStructureCmp {
-  constructor(_zone, table) {
-    this._zone = _zone;
+  constructor(table) {
     this.table = table;
   }
 
+  onActivate() {
+    return this.table.getStructure().then(() => {
+      this.rows = this.table.structure;
+    });
+  }
   onInit() {
     this.fields = [
       {name: 'cid', title: 'Column ID'},
@@ -23,17 +27,7 @@ export class TableStructureCmp {
       {name: 'dflt_value', title: 'Default Value'},
       {name: 'pk', title: 'Primary Key'},
     ];
-    this.rows = this.table.structure;
-    this.subscriber = this.table.emitter.subscribe(() => {
-      this._zone.run(() => {
-        this.rows = this.table.structure;
-      });
-    });
-  }
-
-  onDestroy() {
-    this.subscriber.unsubscribe();
   }
 }
 
-TableStructureCmp.parameters = [[NgZone], [Table]];
+TableStructureCmp.parameters = [[Table]];
