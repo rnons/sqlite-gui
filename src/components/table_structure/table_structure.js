@@ -1,25 +1,39 @@
-import {CORE_DIRECTIVES, Component} from 'angular2/angular2';
+import {CORE_DIRECTIVES, Component, NgZone} from 'angular2/angular2';
 
 import {Table} from '../../services/table';
+import {GridTable} from '../grid_table/grid_table';
 
 @Component({
   selector: 'table-structure-component',
-  templateUrl: 'src/components/table_structure/structure.html',
-  directives: [CORE_DIRECTIVES]
+  template: '<grid-table [fields]="fields" [rows]="rows"></grid-table>',
+  directives: [CORE_DIRECTIVES, GridTable]
 })
 export class TableStructureCmp {
-  constructor(table) {
+  constructor(_zone, table) {
+    this._zone = _zone;
     this.table = table;
-    this.keys = ['cid', 'name', 'type', 'notnull', 'dflt_value', 'pk'];
-    this.keyNames = {
-      cid: 'Column ID',
-      name: 'Name',
-      type: 'Type',
-      notnull: 'Not Null',
-      dflt_value: 'Default Value',
-      pk: 'Primary Key'
-    };
+  }
+
+  onInit() {
+    this.fields = [
+      {name: 'cid', title: 'Column ID'},
+      {name: 'name', title: 'Name'},
+      {name: 'type', title: 'Type'},
+      {name: 'notnull', title: 'Not Null'},
+      {name: 'dflt_value', title: 'Default Value'},
+      {name: 'pk', title: 'Primary Key'},
+    ];
+    this.rows = this.table.structure;
+    this.subscriber = this.table.emitter.subscribe(() => {
+      this._zone.run(() => {
+        this.rows = this.table.structure;
+      });
+    });
+  }
+
+  onDestroy() {
+    this.subscriber.unsubscribe();
   }
 }
 
-TableStructureCmp.parameters = [[Table]];
+TableStructureCmp.parameters = [[NgZone], [Table]];
