@@ -1,6 +1,6 @@
 const ipc = window.require('ipc');
 
-import {NgZone} from 'angular2/angular2';
+import {EventEmitter, NgZone} from 'angular2/angular2';
 import {Injectable} from 'angular2/angular2';
 
 @Injectable()
@@ -12,6 +12,7 @@ export class Table {
     this.keys = null;
     this.onStructure = this.onStructure.bind(this);
     this.onContent = this.onContent.bind(this);
+    this.emitter = new EventEmitter();
     ipc.on('table-structure', this.onStructure);
     ipc.on('table-content', this.onContent);
   }
@@ -34,6 +35,7 @@ export class Table {
     this.keys = data.map((field) => {
       return field.name;
     });
+    this.emitter.next();
   }
 
   onContent(data) {

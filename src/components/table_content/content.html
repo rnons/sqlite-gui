@@ -1,4 +1,13 @@
-<div class="FixedTable">
+<div class="HiddenTable js-hidden-table">
+  <table>
+    <thead>
+      <tr>
+        <th *ng-for="#key of table.keys">{{key}}</th>
+      </tr>
+    </thead>
+  </table>
+</div>
+<div class="FixedTable" [style.width.px]="tableWidth">
   <div class="FixedTable-header"></div>
   <div class="FixedTable-content">
     <table class="Table">

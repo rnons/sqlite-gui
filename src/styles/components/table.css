@@ -1,3 +1,16 @@
+.HiddenTable {
+  visibility: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.HiddenTable th {
+  padding-left: 0.2em;
+  padding-right: 1em;
+  padding: 0 1em;
+}
+
 .FixedTable {
   padding-top: 1.4em;
   position: relative;
@@ -29,6 +42,7 @@
 
 .Table td {
   padding: 0.2em;
+  max-width: 16em;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
