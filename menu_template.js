@@ -75,7 +75,7 @@ const template = [
       {
         label: 'Toggle Full Screen',
         accelerator: (function() {
-          if (process.platform == 'darwin')
+          if (process.platform === 'darwin')
             return 'Ctrl+Command+F';
           else
             return 'F11';
@@ -88,7 +88,7 @@ const template = [
       {
         label: 'Toggle Developer Tools',
         accelerator: (function() {
-          if (process.platform == 'darwin')
+          if (process.platform === 'darwin')
             return 'Alt+Command+I';
           else
             return 'Ctrl+Shift+I';
@@ -122,13 +122,15 @@ const template = [
     submenu: [
       {
         label: 'Learn More',
-        click: function() { electron.shell.openExternal('http://electron.atom.io') }
+        click: function() {
+          electron.shell.openExternal('http://electron.atom.io');
+        }
       },
     ]
   },
 ];
 
-if (process.platform == 'darwin') {
+if (process.platform === 'darwin') {
   const name = electron.app.getName();
   template.unshift({
     label: name,

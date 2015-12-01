@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron main.js",
     "dev": "watchify -t [ babelify --optional es7.decorators ] -o dist/app.js src/app.js & postcss -c postcss.conf.js --local-plugins -o dist/main.css src/styles/main.css -w",
-    "lint": "node_modules/eslint/bin/eslint.js src *.js"
+    "lint": "eslint src *.js"
   },
   "repository": {
     "type": "git",
