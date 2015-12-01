@@ -1,4 +1,4 @@
-const ipc = window.require('ipc');
+const ipcRenderer = window.require('electron').ipcRenderer;
 
 import 'reflect-metadata';
 import 'zone.js';
@@ -49,8 +49,8 @@ class AppComponent{
       });
     });
 
-    ipc.send('get-tables');
-    ipc.on('tables', (tables) => {
+    ipcRenderer.send('get-tables');
+    ipcRenderer.on('tables', (tables) => {
       zone.run(() => {
         this.tables = tables;
       });

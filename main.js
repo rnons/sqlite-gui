@@ -1,10 +1,11 @@
-const app = require('app');
-const BrowserWindow = require('browser-window');
-const Menu = require('menu');
-const ipc = require('ipc');
+const electron = require('electron');
+const app = electron.app;
+const BrowserWindow = electron.BrowserWindow;
+const Menu = electron.Menu;
+const ipcMain = electron.ipcMain;
 
 // Report crashes to our server.
-require('crash-reporter').start();
+electron.crashReporter.start();
 
 const database = require('./database');
 const menuTemplate = require('./menu_template');
@@ -33,7 +34,7 @@ app.on('ready', function() {
   Menu.setApplicationMenu(menu);
 
   // and load the index.html of the app.
-  mainWindow.loadUrl('file://' + __dirname + '/index.html');
+  mainWindow.loadURL('file://' + __dirname + '/index.html');
 
   // Open the DevTools.
   mainWindow.openDevTools();
@@ -54,16 +55,16 @@ app.on('ready', function() {
     });
   }
 
-  ipc.on('connect-database', (file) => {
+  ipcMain.on('connect-database', (file) => {
     database.connect(file);
     getTablesHandler();
   });
 
-  ipc.on('get-tables', () => {
+  ipcMain.on('get-tables', () => {
     getTablesHandler();
   });
 
-  ipc.on('get-table-structure', (event, name) => {
+  ipcMain.on('get-table-structure', (event, name) => {
     database.getTableStructure(name).then((table) => {
       event.sender.send('table-structure', table);
     }).catch((err) => {
@@ -71,7 +72,7 @@ app.on('ready', function() {
     });
   });
 
-  ipc.on('get-table-content', (event, name) => {
+  ipcMain.on('get-table-content', (event, name) => {
     database.getTableContent(name).then((table) => {
       event.sender.send('table-content', table);
     }).catch((err) => {

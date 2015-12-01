@@ -1,4 +1,4 @@
-const ipc = window.require('ipc');
+const ipcRenderer = window.require('electron').ipcRenderer;
 const remote = window.require("remote");
 const database = remote.require("./database");
 
@@ -15,8 +15,8 @@ export class Table {
     this.onStructure = this.onStructure.bind(this);
     this.onContent = this.onContent.bind(this);
     this.emitter = new EventEmitter();
-    ipc.on('table-structure', this.onStructure);
-    ipc.on('table-content', this.onContent);
+    ipcRenderer.on('table-structure', this.onStructure);
+    ipcRenderer.on('table-content', this.onContent);
   }
 
   use(name) {
@@ -33,7 +33,7 @@ export class Table {
   }
 
   getContent() {
-    ipc.send('get-table-content', this.name);
+    ipcRenderer.send('get-table-content', this.name);
   }
 
   onStructure(data) {

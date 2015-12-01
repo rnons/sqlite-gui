@@ -1,7 +1,8 @@
 'use strict';
 
-const dialog = require('dialog');
-const ipc = require('ipc');
+const electron = require('electron');
+const dialog = electron.dialog;
+const ipcMain = electron.ipcMain;
 
 const template = [
   {
@@ -17,7 +18,7 @@ const template = [
               { name: 'SQLite Database File', extensions: ['sqlite'] }
             ]
           });
-          ipc.emit('connect-database', files[0]);
+          ipcMain.emit('connect-database', files[0]);
         }
       }
     ]
@@ -121,14 +122,14 @@ const template = [
     submenu: [
       {
         label: 'Learn More',
-        click: function() { require('shell').openExternal('http://electron.atom.io') }
+        click: function() { electron.shell.openExternal('http://electron.atom.io') }
       },
     ]
   },
 ];
 
 if (process.platform == 'darwin') {
-  const name = require('app').getName();
+  const name = electron.app.getName();
   template.unshift({
     label: name,
     submenu: [
@@ -167,7 +168,7 @@ if (process.platform == 'darwin') {
       {
         label: 'Quit',
         accelerator: 'Command+Q',
-        click: function() { require('app').quit(); }
+        click: function() { electron.app.quit(); }
       },
     ]
   });
@@ -182,5 +183,4 @@ if (process.platform == 'darwin') {
     }
   );
 }
-
 module.exports = template;
