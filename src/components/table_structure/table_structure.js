@@ -5,18 +5,15 @@ import {GridTable} from '../grid_table/grid_table';
 
 @Component({
   selector: 'table-structure-component',
-  template: '<grid-table [fields]="fields" [rows]="rows"></grid-table>',
+  template: '<grid-table *ng-if="resolved" [fields]="fields" [rows]="rows"></grid-table>',
   directives: [CORE_DIRECTIVES, GridTable]
 })
 export class TableStructureCmp {
   constructor(table) {
     this.table = table;
+    this.resolved = false;
   }
 
-  onActivate() {
-    this.table.getStructure();
-    this.rows = this.table.structure;
-  }
   onInit() {
     this.fields = [
       {name: 'cid', title: 'Column ID'},
@@ -26,6 +23,12 @@ export class TableStructureCmp {
       {name: 'dflt_value', title: 'Default Value'},
       {name: 'pk', title: 'Primary Key'},
     ];
+  }
+
+  onActivate() {
+    this.table.getStructure();
+    this.rows = this.table.structure;
+    this.resolved = true;
   }
 }
 
