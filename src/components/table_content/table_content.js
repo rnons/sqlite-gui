@@ -1,43 +1,27 @@
-import {CORE_DIRECTIVES, Component, ElementRef, NgZone} from 'angular2/angular2';
+import {CORE_DIRECTIVES, Component} from 'angular2/angular2';
 
 import {Table} from '../../services/table';
+import {GridTable} from '../grid_table/grid_table';
 
 @Component({
   selector: 'table-content-component',
-  templateUrl: 'src/components/table_content/content.html',
-  directives: [CORE_DIRECTIVES]
+  template: '<grid-table *ng-if="resolved" [fields]="fields" [rows]="rows"></grid-table>',
+  directives: [CORE_DIRECTIVES, GridTable]
 })
 export class TableContentCmp {
-  constructor(_zone, elementRef, table) {
-    this._zone = _zone;
+  constructor(table) {
     this.table = table;
+    this.resolved = false;
+  }
+
+  onActivate() {
     this.table.getContent();
-
-    this.$el = elementRef.nativeElement;
-    this.$hidden = this.$el.querySelector('.js-hidden-table')
-  }
-
-  onInit() {
-    this.subscriber = this.table.emitter.subscribe(() => {
-      this.resize();
+    this.fields = this.table.keys.map((field) => {
+      return {name: field, title: field};
     });
-  }
-
-  afterViewInit() {
-    this.resize();
-  }
-
-  resize() {
-    const contentWidth = this.$el.getBoundingClientRect().width;
-    const headerWidth = this.$hidden.getBoundingClientRect().width;
-    this._zone.run(() => {
-      this.tableWidth = Math.max(contentWidth, headerWidth);
-    });
-  }
-
-  onDestroy() {
-    this.subscriber.unsubscribe()
+    this.rows = this.table.rows;
+    this.resolved = true;
   }
 }
 
-TableContentCmp.parameters = [[NgZone], [ElementRef], [Table]];
+TableContentCmp.parameters = [[Table]];
