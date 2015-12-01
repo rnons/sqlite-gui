@@ -72,9 +72,9 @@ app.on('ready', function() {
     });
   });
 
-  ipcMain.on('get-table-content', (event, name) => {
-    database.getTableContent(name).then((table) => {
-      event.sender.send('table-content', table);
+  ipcMain.on('get-table-content-sync', (event, name) => {
+    database.getTableContent(name).then((data) => {
+      event.returnValue = data;
     }).catch((err) => {
       if (err) console.log(err);
     });

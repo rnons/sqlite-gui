@@ -1,15 +1,10 @@
 const ipcRenderer = window.require('electron').ipcRenderer;
 
-import {EventEmitter, NgZone} from 'angular2/angular2';
 import {Injectable} from 'angular2/angular2';
 
 @Injectable()
 export class Table {
-  constructor(_zone) {
-    this._zone = _zone;
-    this.onContent = this.onContent.bind(this);
-    this.emitter = new EventEmitter();
-    ipcRenderer.on('table-content', this.onContent);
+  constructor() {
   }
 
   onInit() {
@@ -38,14 +33,7 @@ export class Table {
   }
 
   getContent() {
-    ipcRenderer.send('get-table-content', this.name);
-  }
-
-  onContent(event, data) {
-    this._zone.run(() => {
-      this.rows = data;
-    });
+    const data = ipcRenderer.sendSync('get-table-content-sync', this.name);
+    this.rows = data;
   }
 };
-
-Table.parameters = [[NgZone]];
