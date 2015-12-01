@@ -5,7 +5,7 @@ import {GridTable} from '../grid_table/grid_table';
 
 @Component({
   selector: 'table-structure-component',
-  template: '<grid-table *ng-if="resolved" [fields]="fields" [rows]="rows"></grid-table>',
+  template: '<grid-table *ng-if="resolved" [columns]="columns" [rows]="rows"></grid-table>',
   directives: [CORE_DIRECTIVES, GridTable]
 })
 export class TableStructureCmp {
@@ -15,7 +15,7 @@ export class TableStructureCmp {
   }
 
   onInit() {
-    this.fields = [
+    this.columns = [
       {name: 'cid', title: 'Column ID'},
       {name: 'name', title: 'Name'},
       {name: 'type', title: 'Type'},

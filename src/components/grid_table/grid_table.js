@@ -4,7 +4,7 @@ import {NgFor, Component, ElementRef} from 'angular2/angular2';
   selector: 'grid-table',
   templateUrl: 'src/components/grid_table/grid_table.html',
   directives: [NgFor],
-  properties: ['fields', 'rows']
+  properties: ['columns', 'rows']
 })
 export class GridTable {
   constructor(elementRef) {

@@ -5,7 +5,7 @@ import {GridTable} from '../grid_table/grid_table';
 
 @Component({
   selector: 'table-content-component',
-  template: '<grid-table *ng-if="resolved" [fields]="fields" [rows]="rows"></grid-table>',
+  template: '<grid-table *ng-if="resolved" [columns]="columns" [rows]="rows"></grid-table>',
   directives: [CORE_DIRECTIVES, GridTable]
 })
 export class TableContentCmp {
@@ -16,7 +16,7 @@ export class TableContentCmp {
 
   onActivate() {
     this.table.getContent();
-    this.fields = this.table.keys.map((field) => {
+    this.columns = this.table.keys.map((field) => {
       return {name: field, title: field};
     });
     this.rows = this.table.rows;
