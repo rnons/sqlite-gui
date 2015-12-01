@@ -50,9 +50,9 @@ class AppComponent{
     });
 
     ipcRenderer.send('get-tables');
-    ipcRenderer.on('tables', (tables) => {
+    ipcRenderer.on('tables', (event, data) => {
       zone.run(() => {
-        this.tables = tables;
+        this.tables = data;
       });
     });
   }

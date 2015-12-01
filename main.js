@@ -64,9 +64,9 @@ app.on('ready', function() {
     getTablesHandler();
   });
 
-  ipcMain.on('get-table-structure', (event, name) => {
-    database.getTableStructure(name).then((table) => {
-      event.sender.send('table-structure', table);
+  ipcMain.on('get-table-structure-sync', (event, name) => {
+    database.getTableStructure(name).then((data) => {
+      event.returnValue = data;
     }).catch((err) => {
       if (err) console.log(err);
     });
@@ -80,4 +80,3 @@ app.on('ready', function() {
     });
   });
 });
-

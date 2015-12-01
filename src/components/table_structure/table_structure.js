@@ -14,9 +14,8 @@ export class TableStructureCmp {
   }
 
   onActivate() {
-    return this.table.getStructure().then(() => {
-      this.rows = this.table.structure;
-    });
+    this.table.getStructure();
+    this.rows = this.table.structure;
   }
   onInit() {
     this.fields = [
